@@ -31,29 +31,94 @@ public class Main {
 
         Map map;
 
+        boolean repeat = true;
+        String prompt = "";
+
 
             switch (select) {
                 case 1:
 
                     map = API_Utilities.mapFromURL();
-                    while (!API_Utilities.countryListAsSet(map).contains(countryCode)){
-                        System.out.println("Please enter a valid country list from the list below");
-                        API_Utilities.printCountryList(map);
-                        countryCode = scan2.nextLine().toUpperCase();
+
+                    while (repeat) {
+
+                        while (!API_Utilities.countryListAsSet(map).contains(countryCode)) {
+                            System.out.println("Please enter a valid country list from the list below");
+                            API_Utilities.printCountryList(map);
+                            countryCode = scan2.nextLine().toUpperCase();
+                        }
+                        API_Utilities.getData(countryCode, map);
+
+                        System.out.println("\nWould you like to lookup for another country?" +
+                                "\nY: Yes" +
+                                "\nN: No" +
+                                "\n");
+
+                        prompt = scan2.nextLine().toLowerCase();
+
+                        while(!prompt.equals("y") && !prompt.equals("n")) {
+                            System.out.println("Please enter Y or N as response");
+                            prompt = scan2.nextLine().toLowerCase();
+                        }
+
+                        if (prompt.equals("y")) {
+                            repeat = true;
+
+                            System.out.println("Please enter two-character country code");
+
+                            countryCode = scan2.nextLine().toUpperCase();
+
+                        } else if (prompt.equals("n")){
+                            repeat = false;
+
+                            System.out.println("\nThank you for using Country Lookup Service!");
+
+                        }
+
                     }
-                    API_Utilities.getData(countryCode, map);
 
                     break;
 
                 case 2:
 
                     map = API_Utilities.mapFromFile();
-                    while (!API_Utilities.countryListAsSet(map).contains(countryCode)){
-                        System.out.println("Please enter a valid country list from the list below");
-                        API_Utilities.printCountryList(map);
-                        countryCode = scan2.nextLine().toUpperCase();
+
+                    while (repeat) {
+
+                        while (!API_Utilities.countryListAsSet(map).contains(countryCode)) {
+                            System.out.println("Please enter a valid country list from the list below");
+                            API_Utilities.printCountryList(map);
+                            countryCode = scan2.nextLine().toUpperCase();
+                        }
+                        API_Utilities.getData(countryCode, map);
+
+                        System.out.println("\nWould you like to lookup for another country?" +
+                                "\nY: Yes" +
+                                "\nN: No" +
+                                "\n");
+
+                        prompt = scan2.nextLine().toLowerCase();
+
+                        while(!prompt.equals("y") && !prompt.equals("n")) {
+                            System.out.println("Please enter Y or N as response");
+                            prompt = scan2.nextLine().toLowerCase();
+                        }
+
+                        if (prompt.equals("y")) {
+                            repeat = true;
+
+                            System.out.println("Please enter two-character country code");
+
+                            countryCode = scan2.nextLine().toUpperCase();
+
+                        } else if (prompt.equals("n")){
+                            repeat = false;
+
+                            System.out.println("\nThank you for using Country Lookup Service!");
+
+                        }
+
                     }
-                    API_Utilities.getData(countryCode, map);
 
                     break;
 
